@@ -1,0 +1,31 @@
+.Header {
+  display: flex;
+  position: sticky;
+  align-items: center;
+  padding: 10px;
+  background-color: lightgray;
+  box-shadow: 0px 1px 3px 2px rgb(133, 133, 133);
+}
+
+.Title {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.Fill {
+  flex: 1;
+}
+
+.Icon {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.Github {
+  color: black;
+  margin-right: 10px;
+}
+
+.Plus {
+  color: seagreen;
+}
