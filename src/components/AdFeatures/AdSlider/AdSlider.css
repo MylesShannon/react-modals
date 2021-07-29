@@ -1,0 +1,16 @@
+.Slider {
+  display: flex;
+  align-items: center;
+  height: 24px;
+  margin: 10px 0;
+}
+
+.Slider .Value {
+  min-width: 28px;
+  margin-right: 4px;
+  text-align: right;
+}
+
+.Slider label {
+  margin-right: 5px;
+}

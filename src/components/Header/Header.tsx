@@ -14,6 +14,11 @@ class Header extends Component<HeaderProps> {
       <div className="Header">
         <div className="Title">Ad Builder</div>
         <div className="Fill"></div>
+        <FontAwesomeIcon
+          onClick={() => this.props.onPlusClick()}
+          className="Icon Plus"
+          icon={faPlus}
+        />
         <a
           href="https://github.com/MylesShannon/react-modals"
           rel="noreferrer"
@@ -21,11 +26,6 @@ class Header extends Component<HeaderProps> {
         >
           <FontAwesomeIcon className="Icon Github" icon={faGithub} />
         </a>
-        <FontAwesomeIcon
-          onClick={() => this.props.onPlusClick()}
-          className="Icon Plus"
-          icon={faPlus}
-        />
       </div>
     );
   }

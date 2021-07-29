@@ -1,49 +1,74 @@
-import { Component } from "react";
+import { Component, RefObject, createRef } from "react";
 import Modal from "react-modal";
 import "./App.css";
-import Header from "./components/header/Header";
-import Content from "./components/content/Content";
-
-interface AppProps {}
-interface AppState {
-  isModalOpen: boolean;
-}
+import Header from "./components/Header/Header";
+import Content from "./components/Content/Content";
+import Workflow from "./components/Workflow/Workflow";
+import { Ad, AdFeatureType } from "./components/Ad/Ad";
+import AdList from "./components/AdList/AdList";
 
 Modal.setAppElement("#root");
 
-class App extends Component<AppProps, AppState> {
-  constructor(props: AppProps) {
+class App extends Component {
+  constructor(props: any) {
     super(props);
-    this.state = {
-      isModalOpen: false
-    };
+    this._workflowRef = createRef();
   }
 
-  setModal(isModalOpen: boolean): void {
-    this.setState({ isModalOpen });
-  }
-
-  openWorkFlow(): void {
-    alert("Workflow started!");
-  }
+  private _workflowRef: RefObject<Workflow>;
+  private _ads: Array<Ad> = [
+    {
+      name: "My first Ad",
+      features: [
+        {
+          type: AdFeatureType.LongText,
+          content: "A Long Text"
+        },
+        {
+          type: AdFeatureType.ShortText,
+          content: "A Short Text"
+        },
+        {
+          type: AdFeatureType.Date,
+          content: "01/24/1992"
+        },
+        {
+          type: AdFeatureType.Image,
+          content: "https://picsum.photos/200/300"
+        },
+        {
+          type: AdFeatureType.Radio,
+          contentList: ["Hello", "World"]
+        },
+        {
+          type: AdFeatureType.Checkbox,
+          contentList: ["Checkbox 1", "Checkbox 2"]
+        },
+        {
+          type: AdFeatureType.Select,
+          contentList: ["Option 1", "Option 2"]
+        },
+        {
+          type: AdFeatureType.Slider,
+          content: "percent"
+        }
+      ]
+    },
+    {
+      name: "Test Ad",
+      features: []
+    }
+  ];
 
   render() {
     return (
       <div className="App">
-        <Header onPlusClick={this.openWorkFlow}></Header>
+        <Header
+          onPlusClick={() => this._workflowRef.current?.setModal(true)}
+        ></Header>
         <Content>
-          <button onClick={() => this.setModal(true)}>Open modal</button>
-          <Modal
-            isOpen={this.state.isModalOpen}
-            onRequestClose={() => this.setModal(false)}
-            style={{
-              overlay: {
-                backgroundColor: "gray"
-              }
-            }}
-          >
-            <button onClick={() => this.setModal(false)}>Close</button>
-          </Modal>
+          <Workflow ref={this._workflowRef}></Workflow>
+          <AdList ads={this._ads}></AdList>
         </Content>
       </div>
     );
